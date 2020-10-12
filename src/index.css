@@ -1,0 +1,250 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  color: #252525;
+}
+
+.center {
+  text-align: center;
+}
+
+/* Add a black background color to the top navigation */
+.topnav {
+  background-color: #333;
+  overflow: hidden;
+}
+
+/* Style the links inside the navigation bar */
+.topnav .tags {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  border-bottom: 3px solid transparent;
+}
+
+.topnav a:hover {
+  border-bottom: 3px solid;
+  color: white;
+  text-decoration: none;
+}
+
+.topnav a.active {
+  border-bottom: 3px solid;
+  color: darkgreen;
+}
+
+.topnav a {
+  color: white;
+}
+.nav-tabs a {
+  color: #333;
+}
+.nav-tabs a.active {
+  color: darkgreen !important;
+}
+
+.card-your-vote {
+  position: relative;
+    float: right;
+    width: 45px;
+    right: 44px;
+    top: -15px;
+    background: orange;
+    border-radius: 50% !important;
+    color: white;
+    font-size: 12px;
+    z-index: 1;
+}
+
+div *,
+div *:before,
+div *:after {
+    -webkit-box-sizing: content-box !important;
+    -moz-box-sizing: content-box !important;
+    box-sizing: content-box !important;
+}
+
+/************************** Bootstrap Cards Css here **************************/
+.card-header {
+  text-align: left;
+}
+.card-body .card-img {
+    width: 150px;
+    float: left;
+    border: 1px, solid, gray
+  }
+
+.new-question {
+  max-width: 500px;
+  margin: 0 auto;
+  float: none;
+  margin-bottom: 10px;
+}
+
+/* Card css end */
+
+
+/******************** LEADERBOARD CSS **************************/
+
+.leaderboard {
+  width: 50%;
+  text-align: center;
+  margin: 0 auto; /* Added */
+  float: none; /* Added */
+  margin-bottom: 10px; /* Added */
+
+}
+
+.leaderboard .container {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.leaderboard .card {
+  margin-bottom: 10px;
+}
+
+.leaderboard .card-title {
+  background-color: lightseagreen;
+}
+
+.leaderboard .card-img-col {
+  border-right: 1px solid;
+  border-color: lightgray;
+}
+
+.leaderboard .card-img {
+  width: 120px;
+}
+
+.leaderboard .paragraphs {
+  margin-top: 20px;
+}
+
+.leaderboard .card-text {
+  width: 100%;
+  text-align: left;
+  margin-left: 5px;
+}
+
+.leaderboard span {
+  margin-right: 10px;
+}
+
+.leaderboard .total {
+  background-color: lightgreen;
+  border: 1px solid transparent;
+  height: 60px;
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  width: 60px;
+  margin: 10px 0 0px 18px;
+  line-height: 60px;
+}
+/**********************************************************************/
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+.app-btn {
+  text-transform: uppercase;
+  margin: 35px auto;
+  padding: 10px;
+  border: 1px solid rgba(0,0,0,.29);
+  border-radius: 3px;
+  cursor: pointer;
+  background: green;
+  font-size: 16px;
+  width: 250px;
+  position: relative;
+  color: white;
+}
+
+.active {
+  font-weight: bold;
+}
+
+.nav ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  text-decoration: none;
+  position: relative;
+}
+
+.nav li {
+  height: 20px;
+}
+
+.nav li:first-child {
+  padding-left: 0;
+}
+
+.nav li:last-child {
+  float: right;
+  padding-right: 0;
+  margin-right: 0;
+  margin-left: auto;
+}
+
+ul {
+  padding-left: 0;
+  align-items: center;
+}
+
+li {
+  list-style-type: none;
+  padding: 10px;
+  text-decoration: none;
+}
+
+.nav-user {
+  float: right;
+  display: flex;
+  align-items: center;
+}
+
+.nav-avatar {
+  height: 20px;
+  width: 20px;
+  border-radius: 15px;
+  margin: 0 5px 0 10px;
+}
+
+.avatar {
+  height: 150px;
+  width: 150px;
+  margin: 5px;
+}
+
+.login-container {
+  width: 100%;
+  max-width: 250px;
+  padding: 10px;
+  display: flex;
+  flex-flow: row wrap;
+  margin: 0 auto;
+  border: 1px solid #dad7d7;
+  border-radius: 5px;
+  text-align: center;
+  height: 350px;
+}
+
+.login-container .user-select {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.login-container .user-select select {
+    width: 100%;
+  }
+

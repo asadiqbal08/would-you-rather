@@ -14,9 +14,10 @@ class AskedQuestion extends Component {
 
   formSubmit = e => {
     e.preventDefault();
-    if (this.state.optionChoosed) {
+    const option = this.state.optionChoosed
+    if (option) {
       const { authUser, question, dispatch} = this.props;
-      dispatch(saveQuestionAnswer(authUser, question.id, this.state.optionChoosed));
+      dispatch(saveQuestionAnswer(authUser, question.id, option));
     }
   };
 

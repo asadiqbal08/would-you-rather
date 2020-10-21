@@ -1,37 +1,37 @@
 import {
-  RECEIVE_USERS,
-  ADD_ANSWER_TO_USER,
-  ADD_QUESTION_TO_USER
-} from '../actions/users';
+    FETCH_USERS,
+    SAVE_USER_ANSWER,
+    ASSOCIATE_USER_TO_QUESTION
+  } from '../actions/users'
 
-export default function users(state = {}, action) {
-  switch (action.type) {
-    case RECEIVE_USERS:
-      return {
-        ...state,
-        ...action.users
-      };
-    case ADD_ANSWER_TO_USER:
-      return {
-        ...state,
-        [action.authUser]: {
-          ...state[action.authUser],
-          answers: {
-            ...state[action.authUser].answers,
-            [action.qid]: action.answer
-          }
-        }
-      };
-    case ADD_QUESTION_TO_USER:
+export default function users (state = {}, action) {
+    switch(action.type) {
+        case FETCH_USERS :
+            return {
+                ...state,
+                ...action.users
+            }
+        case SAVE_USER_ANSWER:
+            return {
+                ...state,
+                [action.authUser]: {
+                  ...state[action.authUser],
+                  answers: {
+                    ...state[action.authUser].answers,
+                    [action.qid]: action.answer
+                  }
+                }
+            }
+        case ASSOCIATE_USER_TO_QUESTION:
+            return {
+                ...state,
+                [action.author]: {
+                ...state[action.author],
+                questions: state[action.author].questions.concat([action.question.id])
+                }
+            }
 
-      return {
-        ...state,
-        [action.author]: {
-          ...state[action.author],
-          questions: state[action.author].questions.concat(action.id)
+        default :
+            return state
         }
-      };
-    default:
-      return state;
-  }
-}
+    }

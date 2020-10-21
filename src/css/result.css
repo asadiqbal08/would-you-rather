@@ -1,0 +1,36 @@
+.result-rows .col {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.optionTwo {
+  margin-top: 15px;
+}
+
+.result-rows .list-group {
+  width: 19rem;
+  height: 150px;
+  position: relative;
+
+}
+
+.result-rows .list-group li {
+  width: 100%;
+}
+
+.result-rows .progress {
+  width: 100%;
+  height: 3rem;
+  background: darkgray;
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 30px;
+}
+
+.result-rows .votes {
+  width: 100%;
+  text-align: center;
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 2px;
+}

@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { handleInitialData } from '../actions/shared';
+import { getInitialData } from '../actions/shared';
 import { connect } from 'react-redux';
 import Login from './Login';
 import Nav from './Nav';
@@ -13,11 +13,10 @@ import NotFound from './NotFound';
 class App extends Component {
 
   componentDidMount() {
-    this.props.dispatch(handleInitialData());
+    this.props.dispatch(getInitialData());
   }
   render() {
     const { userLoggedIn } = this.props;
-
     return (
       <Router>
         <div className="App">

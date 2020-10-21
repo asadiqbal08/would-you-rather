@@ -1,40 +1,27 @@
-import { saveQuestion } from '../utils/api';
-import { addQuestionToUser } from '../actions/users';
+export const FETCH_QUESTIONS = 'FETCH_QUESTIONS'
+export const USER_ANSWERED_TO_QUESTION = 'USER_ANSWERED_TO_QUESTION'
+export const NEW_USER_QUESTION = 'NEW_USER_QUESTION'
 
-export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS';
-export const ANSWER_QUESTION = 'ANSWER_QUESTION';
-export const ADD_QUESTION = 'ADD_QUESTION';
 
-export function receiveQuestions(questions) {
+export function fetchQuestions (questions) {
   return {
-    type: RECEIVE_QUESTIONS,
-    questions
-  };
+    type: FETCH_QUESTIONS,
+    questions,
+  }
 }
 
-export function addAnswerToQuestion(authUser, qid, answer) {
-  return {
-    type: ANSWER_QUESTION,
-    authUser,
-    qid,
-    answer
-  };
+export function SaveAnswerToQuestion (authUser, qid, answer) {
+    return {
+        type: USER_ANSWERED_TO_QUESTION,
+        authUser,
+        qid,
+        answer
+    }
 }
 
-function addQuestion(question) {
-  return {
-    type: ADD_QUESTION,
-    question
-  };
-}
-
-export function newQuestionHandler(optionOneText, optionTwoText, author) {
-  return dispatch => {
-    return saveQuestion({ optionOneText, optionTwoText, author }).then(
-      question => {
-        dispatch(addQuestion(question));
-        dispatch(addQuestionToUser(question));
-      }
-    );
-  };
+export function NewUserQuestion(question) {
+    return {
+        type: NEW_USER_QUESTION,
+        question
+    }
 }

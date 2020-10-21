@@ -40,10 +40,10 @@ export class Result extends Component {
     
     return (
       <div className="container">
-      <div className="row">
+      <div className="row result-rows">
         <h3>Results:</h3>
-        <div className="col" style={{paddingLeft: '0px', paddingRight: '0px'}}>
-          <div>
+        <div className="col">
+          <div className='optionOne'>
             {userVote === 'optionOne' && (
               <div className="card-your-vote">Your Vote</div>
             )}
@@ -54,7 +54,7 @@ export class Result extends Component {
               styles={this.getBackGroundColor(optionOneVotes, optionTwoVotes, 'optionOne')}
             />
           </div>
-          <div style={{marginTop: '15px'}}>
+          <div className='optionTwo'>
             {userVote === 'optionTwo' && (
               <div className="card-your-vote">Your Vote</div>
             )}

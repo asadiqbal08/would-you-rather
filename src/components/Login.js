@@ -40,7 +40,7 @@ class Login extends Component {
     const { userId, toDashboard } = this.state;
     const { users } = this.props;
     const selected = userId ? userId : -1;
-    const avatar = userId ? users[userId].avatarURL : '/images/avatars/wouldYouRather.png';
+    const avatar = userId ? users[userId].avatarURL : '/images/users/wouldYouRather.png';
 
 
     if(toDashboard) {
@@ -63,7 +63,7 @@ class Login extends Component {
               <option value={-1} disabled>Select user to login...</option>
               {Object.keys(users).map(function(key) {
                 return (
-                  <option value={users[key].id} key={key} style={{ backgroundImage: `url(${users[key].avatarURL})`, backgroundSize: '10px', backgroundRepeat: "no-repeat"  }}>
+                  <option className='options-data' value={users[key].id} key={key} style={{ backgroundImage: `url(${users[key].avatarURL})`}}>
                     {users[key].id}
                   </option>
                 );

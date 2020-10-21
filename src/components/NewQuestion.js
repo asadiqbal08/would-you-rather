@@ -1,36 +1,36 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { newQuestionHandler } from '../actions/questions';
+import { AddNewUserQuestionHandler } from '../actions/shared';
 
 export class NewQuestion extends Component {
   
   state = {
     questionSubmited: false,
-    option1: '',
-    option2: ''
+    first_option: '',
+    second_option: ''
   };
   handleChange = e => {
     this.setState({ [e.target.id]: e.target.value });
   };
   handleSubmit = e => {
     e.preventDefault();
-    const { authUser } = this.props;
-    const { option1, option2 } = this.state;
+    const { authUser, dispatch } = this.props;
+    const { first_option, second_option } = this.state;
 
     new Promise((res, rej) => {
-      this.props.dispatch(newQuestionHandler(option1, option2, authUser));
+      dispatch(AddNewUserQuestionHandler(first_option, second_option, authUser));
       setTimeout(() => res('success'), 1000);
     }).then(() => {
       this.setState({
-        option1: '',
-        option2: ''
+        first_option: '',
+        second_option: ''
       });
       this.setState({ questionSubmited: true });
     });
   };
   render() {
-    const disabled = (this.state.option1 === '' || this.state.option2 === '') ? 'disabled' : '';
+    const disabled = (this.state.first_option === '' || this.state.second_option === '') ? 'disabled' : '';
 
     if (this.state.questionSubmited) {
       return <Redirect to="/" />;
@@ -47,7 +47,7 @@ export class NewQuestion extends Component {
           <h5 className="text-left">Would you rather...</h5>
             <div className="row align-items-center h-100">
               <div className='col'>
-                <input id='option1' type="text" className='w-75' placeholder='Enter OptionOne text here' onChange={this.handleChange} value={this.state.option1}/>
+                <input id='first_option' type="text" className='w-75' placeholder='Enter OptionOne text here' onChange={this.handleChange} value={this.state.first_option}/>
               </div>
             </div>
             <div className='row align-items-center h-100'>
@@ -55,10 +55,10 @@ export class NewQuestion extends Component {
             </div>
             <div className='row align-items-center h-100'>
               <div className='col'>
-                <input id='option2' type="text" className='w-75' placeholder='Enter OptionTwo text here' onChange={this.handleChange} value={this.state.option2}/>
+                <input id='second_option' type="text" className='w-75' placeholder='Enter OptionTwo text here' onChange={this.handleChange} value={this.state.second_option}/>
               </div>
             </div>
-            <div className='row align-items-center h-100'>
+            <div className='row align-items-center question-submit-button h-100'>
               <div className='col'>
                 <button className={`app-btn ${disabled && "btn-outline-secondary"}`} disabled={disabled} onClick={this.handleSubmit}>Submit</button>
               </div>

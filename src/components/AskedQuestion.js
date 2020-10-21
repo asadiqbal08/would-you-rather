@@ -1,53 +1,50 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { saveAnswerHandler } from '../actions/users';
+import { saveQuestionAnswer } from '../actions/shared';
 
 class AskedQuestion extends Component {
-  static propTypes = {
-    authUser: PropTypes.string.isRequired,
-    question: PropTypes.object.isRequired
-  };
+  
   state = {
-    selectedOption: ''
-  };
+    optionChoosed: ''
+  }
 
   onValueChange = (event) => {
-    this.setState({ selectedOption: event.target.value });
+    this.setState({ optionChoosed: event.target.value });
   }
 
   formSubmit = e => {
     e.preventDefault();
-    if (this.state.selectedOption !== '') {
-      const { authUser, question, saveAnswerHandler} = this.props;
-      saveAnswerHandler(authUser, question.id, this.state.selectedOption);
+    if (this.state.optionChoosed) {
+      const { authUser, question, dispatch} = this.props;
+      dispatch(saveQuestionAnswer(authUser, question.id, this.state.optionChoosed));
     }
   };
 
   render() {
     const { question } = this.props;
-    const disabled = this.state.selectedOption === '' ? true : false;
+    let disabled = false;
+    if (this.state.optionChoosed === '') {
+      disabled = true
+    }
 
     return (
       <form onSubmit={this.formSubmit}>
-      <div className="radioa">
-        <label>
-          <input
-            type="radio"
-            value="optionOne"
-            checked={this.state.selectedOption === 'optionOne'}
-            onChange={this.onValueChange}
-            name="optradio"
-          />
-           {question.optionOne.text}
-        </label>
-      </div>
       <div className="radios">
         <label>
           <input
             type="radio"
+            value="optionOne"
+            name="optradio"
+            onChange={this.onValueChange}
+          />
+           {question.optionOne.text}
+        </label>
+        </div>
+        <div className="radios">
+        <label>
+          <input
+            type="radio"
             value="optionTwo"
-            checked={this.state.selectedOption === "optionTwo"}
             onChange={this.onValueChange}
             name="optradio"
           />
@@ -68,4 +65,4 @@ function mapStateToProps({ authUser }) {
   }
 }
 
-export default connect(mapStateToProps, {saveAnswerHandler})(AskedQuestion);
+export default connect(mapStateToProps)(AskedQuestion);

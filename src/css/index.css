@@ -33,6 +33,26 @@ body {
   text-decoration: none;
 }
 
+.link-btn {
+  text-transform: uppercase;
+  border: 1px solid rgba(0,0,0,.29);
+  border-radius: 3px;
+  cursor: pointer;
+  background: green;
+  font-size: 16px;
+  position: relative;
+  color: white;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.link-btn:hover {
+  text-decoration: none;
+  color: white;
+}
+
 .topnav a.active {
   border-bottom: 3px solid;
   color: darkgreen;
@@ -157,7 +177,6 @@ div *:after {
 
 .app-btn {
   text-transform: uppercase;
-  margin: 35px auto;
   padding: 10px;
   border: 1px solid rgba(0,0,0,.29);
   border-radius: 3px;
@@ -248,3 +267,25 @@ li {
     width: 100%;
   }
 
+.user-ballot .card-body {
+  display: flex;
+  align-items: center;
+}
+
+.user-ballot .card-body .card-img {
+  border-radius: 50%;
+  background: lightblue;
+}
+
+.user-ballot .card-body .poll {
+  margin-left: 20px;
+  width: 100%;
+}
+
+.user-ballot .card-body .poll-advertisement {
+  margin-left: 60px;
+}
+
+.new-question .card-body .question-submit-button {
+  margin-top: 20px;
+}

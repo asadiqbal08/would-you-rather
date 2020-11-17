@@ -15,21 +15,21 @@ export class Home extends Component {
             id="controlled-tab-example"
             className="nav nav-tabs justify-content-center"
           >
-            <Tab eventKey="answered" title="Answered Questions">
-              {answered.map(question => (
-              <UserBallotCard
-                key={question.id}
-                question_id={question.id}
-                unanswered={false}
-              />
-              ))}
-            </Tab>
             <Tab eventKey="unanswered" title="Unanswered Questions">
               {unanswered.map(question => (
               <UserBallotCard
                 key={question.id}
                 question_id={question.id}
                 unanswered={true}
+              />
+              ))}
+            </Tab>
+            <Tab eventKey="answered" title="Answered Questions">
+              {answered.map(question => (
+              <UserBallotCard
+                key={question.id}
+                question_id={question.id}
+                unanswered={false}
               />
               ))}
             </Tab>

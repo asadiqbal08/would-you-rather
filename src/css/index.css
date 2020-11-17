@@ -186,6 +186,7 @@ div *:after {
   width: 250px;
   position: relative;
   color: white;
+  margin-top: 10px;
 }
 
 .active {
@@ -255,7 +256,7 @@ li {
   border: 1px solid #dad7d7;
   border-radius: 5px;
   text-align: center;
-  height: 350px;
+  height: 400px;
 }
 
 .login-container .user-select {
@@ -288,4 +289,14 @@ li {
 
 .new-question .card-body .question-submit-button {
   margin-top: 20px;
+}
+
+.radios-elements {
+  display: grid;
+  text-align: left;
+}
+
+.input {
+  width: 100%;
+  margin-top: 10px;
 }

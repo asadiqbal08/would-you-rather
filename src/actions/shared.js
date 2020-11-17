@@ -27,8 +27,8 @@ export function AddNewUserQuestionHandler(optionOneText, optionTwoText, author) 
   return (dispatch) => { 
       _saveQuestion({optionOneText, optionTwoText, author})
         .then((question) => {
-            dispatch(NewUserQuestion(question));
-            dispatch(AssociateUserToQuestion(question, author));
+          dispatch(NewUserQuestion(question));
+          dispatch(AssociateUserToQuestion(question, author));
         })
         .catch(() => {
           alert('There was an error. Try again.')

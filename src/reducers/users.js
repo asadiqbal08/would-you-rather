@@ -1,5 +1,6 @@
 import {
     FETCH_USERS,
+    CREATE_USER,
     SAVE_USER_ANSWER,
     ASSOCIATE_USER_TO_QUESTION
   } from '../actions/users'
@@ -10,6 +11,10 @@ export default function users (state = {}, action) {
             return {
                 ...state,
                 ...action.users
+            }
+        case CREATE_USER:
+            return {
+                ...state
             }
         case SAVE_USER_ANSWER:
             return {

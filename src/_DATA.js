@@ -1,3 +1,84 @@
+import AsyncStorage from '@react-native-community/async-storage';
+const WOULD_YOU_RATHER_USERS_KEY = 'UdaciWouldYouRather:WouldYouRatherUsers'
+const WOULD_YOU_RATHER_QUESTIONS_KEY = 'UdaciWouldYouRather:WouldYouRatherQuestions'
+
+
+export function SaveUserToStorage ({id, name, avatarURL, answers={}, questions=[]}) {
+  return AsyncStorage.mergeItem(WOULD_YOU_RATHER_USERS_KEY, JSON.stringify({
+    [id]: { 
+      'id': id, 
+      'name': name, 
+      'avatarURL': avatarURL,
+      'answers': answers,
+      'questions': questions
+     }
+  }))
+}
+
+export function UpdateUserToStorage (id, question, answer='') {
+  return AsyncStorage.getItem(WOULD_YOU_RATHER_USERS_KEY)
+    .then((results) => {
+      const all_users = JSON.parse(results)
+      let user = all_users[id]
+      if (question && answer === '') {
+        user['questions'].push(question)
+      } 
+      else if (answer) {
+        user.answers[question] = answer;
+      }
+      all_users[id] = user
+      AsyncStorage.setItem(WOULD_YOU_RATHER_USERS_KEY, JSON.stringify(all_users))
+    })
+}
+
+
+export function UpdateQuestionToStorage (authUser, qid, answer) {
+  return AsyncStorage.getItem(WOULD_YOU_RATHER_QUESTIONS_KEY)
+    .then((results) => {
+      const all_questions = JSON.parse(results)
+      let question = all_questions[qid]
+      question[answer].votes.push(authUser)
+      all_questions[qid] = question
+      AsyncStorage.setItem(WOULD_YOU_RATHER_QUESTIONS_KEY, JSON.stringify(all_questions))
+    })
+}
+
+export function SaveQuestionToStorage ({id, author, timestamp, optionOne=[], optionTwo=[]}) {
+  return AsyncStorage.mergeItem(WOULD_YOU_RATHER_QUESTIONS_KEY, JSON.stringify({
+    [id]: { 
+      'id': id, 
+      'author': author,
+      'timestamp': timestamp,
+      'optionOne': optionOne,
+      'optionTwo': optionTwo,
+     }
+  }))
+}
+
+export const getUsersFromStorage = async () => {
+  try {
+    //AsyncStorage.clear()
+    const users = await AsyncStorage.getItem(WOULD_YOU_RATHER_USERS_KEY);
+    return JSON.parse(users);
+
+    } catch (error) {
+        console.log(error, "An error occured while fetching all users data.")
+    }
+}
+
+export const getQuestionsFromStorage = async () => {
+  try {
+    //AsyncStorage.clear()
+    const questions = await AsyncStorage.getItem(WOULD_YOU_RATHER_QUESTIONS_KEY);
+    return JSON.parse(questions);
+
+    } catch (error) {
+        console.log(error, "An error occured while fetching all questions data.")
+    }
+}
+
+
+
 let users = {
   brittini: {
     id: 'brittini',
@@ -162,15 +243,31 @@ function generateUID() {
 }
 
 export function _getUsers() {
-  return new Promise((res, rej) => {
-    setTimeout(() => res({ ...users }), 1000);
-  });
+  return AsyncStorage.getItem(WOULD_YOU_RATHER_USERS_KEY)
+    .then((results) => {
+      if (results === null) {
+        Object.keys(users).forEach(function(key) {
+          SaveUserToStorage(users[key])
+      });
+    } else {
+      return getUsersFromStorage()
+    }
+      
+  })
 }
 
 export function _getQuestions() {
-  return new Promise((res, rej) => {
-    setTimeout(() => res({ ...questions }), 1000);
-  });
+  return AsyncStorage.getItem(WOULD_YOU_RATHER_QUESTIONS_KEY)
+    .then((results) => {
+      if (results === null) {
+        Object.keys(questions).forEach(function(key) {
+          SaveQuestionToStorage(questions[key])
+      });
+    } else {
+      return getQuestionsFromStorage()
+    }
+      
+  })
 }
 
 function formatQuestion({ optionOneText, optionTwoText, author }) {
@@ -193,51 +290,21 @@ export function _saveQuestion(question) {
   return new Promise((res, rej) => {
     const authUser = question.author;
     const formattedQuestion = formatQuestion(question);
-
     setTimeout(() => {
-      questions = {
-        ...questions,
-        [formattedQuestion.id]: formattedQuestion
-      };
-
-      users = {
-        ...users,
-        [authUser]: {
-          ...users[authUser],
-          questions: users[authUser].questions.concat([formattedQuestion.id])
-        }
-      };
-
+      SaveQuestionToStorage(formattedQuestion)
+      UpdateUserToStorage(authUser, formattedQuestion.id )
       res(formattedQuestion);
     }, 1000);
-  });
+  })
 }
 
 export function _saveQuestionAnswer({ authUser, qid, answer }) {
   return new Promise((res, rej) => {
+    users = getUsersFromStorage()
+    questions = getQuestionsFromStorage()
     setTimeout(() => {
-      users = {
-        ...users,
-        [authUser]: {
-          ...users[authUser],
-          answers: {
-            ...users[authUser].answers,
-            [qid]: answer
-          }
-        }
-      };
-
-      questions = {
-        ...questions,
-        [qid]: {
-          ...questions[qid],
-          [answer]: {
-            ...questions[qid][answer],
-            votes: questions[qid][answer].votes.concat([authUser])
-          }
-        }
-      };
-
+      UpdateUserToStorage(authUser, qid, answer )
+      UpdateQuestionToStorage(authUser, qid, answer)
       res();
     }, 500);
   });

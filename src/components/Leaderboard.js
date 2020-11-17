@@ -10,15 +10,14 @@ export class Leaderboard extends Component {
   };
   render() {
     const { users } = this.props;
-
     const data = Object.values(users)
       .map(user => ({
         id: user.id,
         name: user.name,
         avatarURL: user.avatarURL,
-        answerCount: Object.values(user.answers).length,
-        createdQuestionCount: user.questions.length,
-        total: Object.values(user.answers).length + user.questions.length
+        answerCount: user.answers ? Object.values(user.answers).length : 0,
+        createdQuestionCount: user.questions ? user.questions.length : 0,
+        total: (user.answers && user.questions) ? Object.values(user.answers).length + user.questions.length : 0
       }))
       .sort((a, b) => a.total - b.total)
       .reverse()

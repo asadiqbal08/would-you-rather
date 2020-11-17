@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setAuthUser } from '../actions/authUser';
+import RegisterUser from './RegisterUser';
+import { getInitialData } from '../actions/shared';
 
 class Login extends Component {
   state = {
     userId: null,
-    toDashboard: false,
+    renderTo: '',
   }
 
   handleSelectionChanged = function(event) {
@@ -21,30 +23,48 @@ class Login extends Component {
   }
 
   handleLogin = function(event) {
+    event.preventDefault();
     const { userId } = this.state;
     this.props.dispatch(setAuthUser(userId));
 
     this.setState(function(previousState) {
       return {
         ...previousState,
-        toDashboard: true,
+        renderTo: 'dashboard',
+      };
+    });
+  }
+
+  handleRegistration = function(event) {
+    event.preventDefault();
+    this.setState(function(previousState) {
+      return {
+        ...previousState,
+        renderTo: 'registration',
       };
     });
   }
 
   componentDidMount() {
     this.props.dispatch(setAuthUser(null))
+    this.props.dispatch(getInitialData());
   }
 
   render() {
-    const { userId, toDashboard } = this.state;
+    const { userId, renderTo } = this.state;
     const { users } = this.props;
     const selected = userId ? userId : -1;
     const avatar = userId ? users[userId].avatarURL : '/images/users/wouldYouRather.png';
 
 
-    if(toDashboard) {
+    if (renderTo === 'dashboard') {
       return <Redirect to='/' />
+    }
+    
+    else if (renderTo === 'registration') {
+      return (
+      <RegisterUser/>
+      )
     }
 
     return (
@@ -72,6 +92,9 @@ class Login extends Component {
           </div>
           <button className='app-btn' disabled={userId === null} onClick={(event) => this.handleLogin(event)}>
             Login
+          </button>
+          <button className='app-btn' onClick={(event) => this.handleRegistration(event)}>
+            Create New User
           </button>
         </div>
       </div>

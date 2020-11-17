@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/App';
+import App from './App';
 import './css/index.css';
 import './css/login.css';
 import './css/result.css';
+import './css/choose_image.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';

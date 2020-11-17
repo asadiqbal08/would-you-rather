@@ -19,7 +19,7 @@ const Nav = (props) => {
     },
     { 
       id: 3,
-      title: 'New Question',
+      title: 'New Poll',
       path: '/addquestion'
     },
   ]

@@ -1,20 +1,16 @@
 import React, { Component, Fragment } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { getInitialData } from '../actions/shared';
 import { connect } from 'react-redux';
-import Login from './Login';
-import Nav from './Nav';
-import Home from './Home';
-import UserBallotCard from './UserBallotCard';
-import NewQuestion from './NewQuestion';
-import Leaderboard from './Leaderboard';
-import NotFound from './NotFound';
+import Login from './components/Login';
+import Nav from './components/Nav';
+import Home from './components/Home';
+import UserBallotCard from './components/UserBallotCard';
+import NewQuestion from './components/NewQuestion';
+import Leaderboard from './components/Leaderboard';
+import NotFound from './components/NotFound';
 
 class App extends Component {
 
-  componentDidMount() {
-    this.props.dispatch(getInitialData());
-  }
   render() {
     const { userLoggedIn } = this.props;
     return (
@@ -37,7 +33,6 @@ class App extends Component {
                       <Route path="/leaderboard" component={Leaderboard} />
                       <Route path="/questions/:question_id" component={UserBallotCard} />
                       <Route path="/addquestion" component={NewQuestion} />
-                      <Route path="/leaderboard" component={Leaderboard} />
                     </Switch>
                 </div>
             </div>

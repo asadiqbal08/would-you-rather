@@ -29,33 +29,36 @@ class AskedQuestion extends Component {
     }
 
     return (
-      <form onSubmit={this.formSubmit}>
-      <div className="radios">
-        <label>
-          <input
-            type="radio"
-            value="optionOne"
-            name="optradio"
-            onChange={this.onValueChange}
-          />
-           {question.optionOne.text}
-        </label>
-        </div>
-        <div className="radios">
-        <label>
-          <input
-            type="radio"
-            value="optionTwo"
-            onChange={this.onValueChange}
-            name="optradio"
-          />
-           {question.optionTwo.text}
-        </label>
+      <div>
+        <label style={{'text-align': 'center', 'display': 'grid'}}><b>Would You Rather?</b></label>
+        <form onSubmit={this.formSubmit}>
+          <div className="radios-elements">
+            <label>
+              <input
+                type="radio"
+                value="optionOne"
+                name="optradio"
+                onChange={this.onValueChange}
+              />
+              {question.optionOne.text}
+            </label>
+            </div>
+            <div className="radios-elements">
+            <label>
+              <input
+                type="radio"
+                value="optionTwo"
+                onChange={this.onValueChange}
+                name="optradio"
+              />
+              {question.optionTwo.text}
+            </label>
+          </div>
+          <button className={`app-btn ${disabled && "btn-outline-secondary"}`} type="submit" disabled={disabled}>
+            Submit
+          </button>
+      </form>
       </div>
-      <button className={`app-btn ${disabled && "btn-outline-secondary"}`} type="submit" disabled={disabled}>
-        Submit
-      </button>
-    </form>
     );
   }
 }

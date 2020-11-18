@@ -1,6 +1,6 @@
-export const FETCH_QUESTIONS = 'FETCH_QUESTIONS'
-export const USER_ANSWERED_TO_QUESTION = 'USER_ANSWERED_TO_QUESTION'
-export const NEW_USER_QUESTION = 'NEW_USER_QUESTION'
+export const FETCH_QUESTIONS            = 'FETCH_QUESTIONS'
+export const USER_ANSWERED_TO_QUESTION  = 'USER_ANSWERED_TO_QUESTION'
+export const NEW_USER_QUESTION          = 'NEW_USER_QUESTION'
 
 
 export function fetchQuestions (questions) {

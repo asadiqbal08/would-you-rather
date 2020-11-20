@@ -3,6 +3,9 @@ In the "Would You Rather?" Project, you'll build a web app that lets a user play
 
 In your app, users will be able to answer questions, see which questions they haven’t answered, see how other people have voted, post questions, and see the ranking of users on the leaderboard.
 
+# Maintaining State in Local Storage
+Project maintain the user, user's answer, user's question and voting state in local storage. so login back will keep the data persistent. 
+
 # How to install
 
 Open a terminal and move to project directory and run the following commands
